@@ -2,9 +2,11 @@
 
 ## 👥 Équipe
 - Papis CISSOKO
+- Ovina SAINT-MARTIN
+- Ange Fleuryse MANANGANJI
 
 ## 📊 Jeu de données
-**Source** : [Lien vers ton dataset]
+**Source** : https://huggingface.co/datasets/AngryBacteria/league_of_legends/tree/main
 
 **Description** : Dataset contenant les statistiques détaillées de matchs League of Legends incluant :
 - Informations de match (durée, mode, version)
