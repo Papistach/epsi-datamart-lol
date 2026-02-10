@@ -48,11 +48,11 @@
 
 ## 🚀 Utilisation
 
-# Démarrer l'environnement
+### Démarrer l'environnement
 docker-compose up -d
 
-# Accéder à Jupyter
-# Récupérer le token dans les logs
+### Accéder à Jupyter
+### Récupérer le token dans les logs
 docker logs game_notebook
 
 
@@ -75,22 +75,22 @@ docker logs game_notebook
 
 ### Démarrage
 
-# 1. Cloner le repo
+#### 1. Cloner le repo
 git clone https://github.com/TON_USERNAME/epsi-datamart-lol.git
 cd epsi-datamart-lol
 
-# 2. Démarrer l'infrastructure
+#### 2. Démarrer l'infrastructure
 docker-compose up -d
 
-# 3. Accéder à Jupyter
-# URL : http://localhost:8888
-# Token : epsi2024
+#### 3. Accéder à Jupyter
+URL : http://localhost:8888
+Token : epsi2024
 
-# Exécuter dans l'ordre
-# 1. 01_load_raw.ipynb
-# 2. 02_transform.ipynb
-# 3. 03_analysis.ipynb
-# 4. 04_Player.ipynb
+#### Exécuter dans l'ordre
+ 1. 01_load_raw.ipynb
+ 2. 02_transform.ipynb
+ 3. 03_analysis.ipynb
+ 4. 04_Player.ipynb
 
 # Atelier 2 - Modèle dimensionnel
 # Atelier 3 - Visualisation
