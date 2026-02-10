@@ -52,6 +52,38 @@ docker-compose up -d
 # Récupérer le token dans les logs
 docker logs game_notebook
 
+
+
+**Tables** :
+- **`raw_matches`** : Stockage JSON brut (étape ETL initiale)
+- **`match`** : Informations sur les parties (clé primaire `match_id`)
+- **`player`** : Joueurs uniques identifiés par `player_puuid`
+- **`champion`** : Dictionnaire des champions (id + nom)
+- **`participation`** : Table de faits liant matchs, joueurs, champions avec statistiques détaillées
+
+---
+
+## 🚀 Utilisation
+
+### Prérequis
+- Docker Desktop
+- Git
+- Fichier `match_v5.json` placé dans `data/raw/`
+
+### Démarrage
+
+```bash
+# 1. Cloner le repo
+git clone https://github.com/TON_USERNAME/epsi-datamart-lol.git
+cd epsi-datamart-lol
+
+# 2. Démarrer l'infrastructure
+docker-compose up -d
+
+# 3. Accéder à Jupyter
+# URL : http://localhost:8888
+# Token : epsi2024
+
 # Exécuter dans l'ordre
 # 1. 01_load_raw.ipynb
 # 2. 02_transform.ipynb
