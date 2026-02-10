@@ -25,12 +25,17 @@
 ## 🏗️ Architecture
 
 ### Stack technique
-- **Extract/Load** : PostgreSQL 15
-- **Transform** : Jupyter Notebook (Python + pandas + SQLAlchemy)
-- **Visualisation** : Jupyter Notebook
+| Étape | Technologie | Description |
+|-------|-------------|-------------|
+| **Extract/Load** | PostgreSQL 15 | Stockage données brutes JSON + modèle relationnel |
+| **Transform** | Jupyter Notebook (Python) | pandas, SQLAlchemy, ijson pour traitement 1.5GB |
+| **Visualisation** | Jupyter Notebook | matplotlib, seaborn pour analyses et graphiques |
 
-### Modèle relationnel (ERD)
-![ERD](diagrams/erd.png)
+### Infrastructure
+- **Docker Compose** : PostgreSQL + Jupyter Notebook
+- **Volume partagé** : Données et notebooks persistés
+  
+[ERD](diagrams/erd.png)
 
 **Tables** :
 - `MATCH` : Informations sur les parties
