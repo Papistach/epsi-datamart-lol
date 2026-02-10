@@ -4,6 +4,7 @@
 - Papis C
 - Ovina ST-M
 - Ange Fleuryse M
+- Yohann L
 
 ## 📊 Jeu de données
 **Source** : https://huggingface.co/datasets/AngryBacteria/league_of_legends/tree/main
