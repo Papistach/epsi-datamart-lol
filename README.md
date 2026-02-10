@@ -76,4 +76,42 @@ Token : epsi2024
 
 
 # Atelier 2 - Modèle dimensionnel
+
+## 🌟 Atelier 2 - Modèle Dimensionnel
+
+### Schéma en Étoile
+![Schema Etoile](diagrams/star_schema.png)
+
+### Tables Dimensionnelles
+| Table | Type | Description |
+|-------|------|-------------|
+| `dim_date` | Dimension | Temps (année, mois, jour, heure, week-end) |
+| `dim_player` | Dimension | Joueurs avec segmentation (newbie, casual, regular, hardcore) |
+| `dim_champion` | Dimension | Champions avec classe (Tank, Assassin, etc.) |
+| `dim_map` | Dimension | Cartes de jeu (Summoners Rift, ARAM, etc.) |
+| `fact_performance` | Fait | Mesures : kills, deaths, assists, gold, KDA, win/loss |
+
+### Nouveaux Notebooks
+| Notebook | Description |
+|----------|-------------|
+| `05_dimensional_model.ipynb` | Création du schéma en étoile |
+| `06_etl_dimensions.ipynb` | Alimentation des dimensions et faits |
+| `07_analyse_dimensionnelle.ipynb` | Analyses complexes (ex: winrate par classe sur carte X le week-end) |
+
+### Exemple de Requête Analytique
+```sql
+-- Taux de victoire par classe de champion sur Summoners Rift le week-end
+SELECT 
+    dc.champion_class,
+    COUNT(*) as games,
+    ROUND(100.0 * SUM(CASE WHEN fp.win THEN 1 ELSE 0 END) / COUNT(*), 2) as winrate_pct
+FROM fact_performance fp
+JOIN dim_champion dc ON fp.champion_sk = dc.champion_sk
+JOIN dim_map dm ON fp.map_sk = dm.map_sk
+JOIN dim_date dd ON fp.date_id = dd.date_id
+WHERE dm.map_name = 'Summoners Rift'
+  AND dd.is_weekend = true
+GROUP BY dc.champion_class;
+
+
 # Atelier 3 - Visualisation
