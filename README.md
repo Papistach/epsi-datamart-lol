@@ -46,7 +46,7 @@
 
 ## Résultats des changements de données
 
-![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.png)
+![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.PNG)
 
 ## 🚀 Utilisation
 ```bash
