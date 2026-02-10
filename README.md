@@ -117,3 +117,82 @@ GROUP BY dc.champion_class;
 ```
 ---
 # Atelier 3 - Visualisation
+
+Étape 1 : Intégration de Metabase
+1.1 Modification du docker-compose.yml
+Ajoutez deux services qui sont metabase et dozzle au fichier docker-compose.yml existant :
+yaml
+
+version: '3.9'
+
+services:
+  # ...  services existants (postgres, jupyter) ...
+  
+  # ==================== METABASE ====================
+  metabase:
+    image: metabase/metabase:latest
+    container_name: lol_metabase
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabase
+      MB_DB_PASS: metabase_secret
+      MB_DB_HOST: postgres
+      JAVA_OPTS: "-Xmx2g"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - lol_network
+    volumes:
+      - metabase_data:/metabase-data
+
+  # ==================== DOZZLE (Logs) ====================
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: lol_dozzle
+    environment:
+      - DOZZLE_LEVEL=debug
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - lol_network
+
+networks:
+  lol_network:
+    driver: bridge
+
+volumes:
+  # ... vos volumes existants ...
+  metabase_data:
+1.2 Création de la base Metabase dans PostgreSQL
+Créez un script init-metabase.sql:
+sql
+-- Se connecter à postgres en tant que superuser
+CREATE DATABASE metabase;
+CREATE USER metabase_user WITH ENCRYPTED PASSWORD 'metabase_pw';
+GRANT ALL PRIVILEGES ON DATABASE metabase TO metabase-_user;
+1.3 Premier démarrage
+
+# Démarrer la stack complète
+docker-compose down  # si déjà en cours
+docker-compose up -d
+
+# Vérifier que Metabase est prêt 
+docker logs -f metabase
+Accédez à Metabase : http://localhost:3000
+Configuration initiale :
+Language : Français 
+Email : fleuryse@local.fr
+Mot de passe : root
+Database connection :
+Type : PostgreSQL
+Host : postgres (nom du service docker)
+Port : 5432
+Database : test 
+Username : user
+Password : root
