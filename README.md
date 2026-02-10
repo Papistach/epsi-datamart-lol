@@ -112,7 +112,7 @@ JOIN dim_champion dc ON fp.champion_sk = dc.champion_sk
 JOIN dim_map dm ON fp.map_sk = dm.map_sk
 JOIN dim_date dd ON fp.date_id = dd.date_id
 WHERE dm.map_name = 'Summoners Rift'
-  AND dd.is_weekend = true
+AND dd.is_weekend = true
 GROUP BY dc.champion_class;
 ```
 ---
