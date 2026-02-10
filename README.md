@@ -47,7 +47,7 @@
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
 
 ## 🚀 Utilisation
-```bash
+
 # Démarrer l'environnement
 docker-compose up -d
 
@@ -75,7 +75,6 @@ docker logs game_notebook
 
 ### Démarrage
 
-```bash
 # 1. Cloner le repo
 git clone https://github.com/TON_USERNAME/epsi-datamart-lol.git
 cd epsi-datamart-lol
@@ -92,3 +91,6 @@ docker-compose up -d
 # 2. 02_transform.ipynb
 # 3. 03_analysis.ipynb
 # 4. 04_Player.ipynb
+
+# Atelier 2 - Modèle dimensionnel
+# Atelier 3 - Visualisation
