@@ -46,16 +46,6 @@
 - `CHAMPION` : Champions du jeu
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
 
-## 🚀 Utilisation
-
-### Démarrer l'environnement
-docker-compose up -d
-
-### Accéder à Jupyter
-### Récupérer le token dans les logs
-docker logs game_notebook
-
-
 
 **Tables** :
 - **`raw_matches`** : Stockage JSON brut (étape ETL initiale)
@@ -91,6 +81,7 @@ Token : epsi2024
  2. 02_transform.ipynb
  3. 03_analysis.ipynb
  4. 04_Player.ipynb
+
 
 # Atelier 2 - Modèle dimensionnel
 # Atelier 3 - Visualisation
