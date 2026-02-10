@@ -1,4 +1,4 @@
-#Atelier 1 - Statistiques de parties
+# Atelier 1 - Statistiques de parties
 
 # 🎮 League of Legends - Analyse de Parties
 
@@ -6,7 +6,7 @@
 - Papis C
 - Ovina ST-M
 - Ange Fleuryse M
-- Yohann L il dois 50 € à chaqu'un
+- Yohann L
 
 ## 📊 Jeu de données
 **Source** : https://huggingface.co/datasets/AngryBacteria/league_of_legends/tree/main
