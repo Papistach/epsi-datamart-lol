@@ -35,7 +35,7 @@
 - **Docker Compose** : PostgreSQL + Jupyter Notebook
 - **Volume partagé** : Données et notebooks persistés
   
-[ERD](diagrams/erd.png)
+[ERD](/erd.png)
 
 
 
