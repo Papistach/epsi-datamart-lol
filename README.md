@@ -62,8 +62,9 @@ git clone https://github.com/TON_USERNAME/epsi-datamart-lol.git
 cd epsi-datamart-lol
 
 #### 2. Démarrer l'infrastructure
+```bash
 docker-compose up -d
-
+```
 #### 3. Accéder à Jupyter
 URL : http://localhost:8888
 Token : epsi2024
@@ -74,7 +75,7 @@ Token : epsi2024
  3. 03_analysis.ipynb
  4. 04_Player.ipynb
 
-
+---
 # Atelier 2 - Modèle dimensionnel
 
 ## 🌟 Atelier 2 - Modèle Dimensionnel
@@ -112,5 +113,6 @@ JOIN dim_date dd ON fp.date_id = dd.date_id
 WHERE dm.map_name = 'Summoners Rift'
   AND dd.is_weekend = true
 GROUP BY dc.champion_class;
+```
 ---
 # Atelier 3 - Visualisation
