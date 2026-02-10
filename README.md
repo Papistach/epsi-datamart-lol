@@ -99,7 +99,7 @@ Token : epsi2024
 | `07_analyse_dimensionnelle.ipynb` | Analyses complexes (ex: winrate par classe sur carte X le week-end) |
 
 ### Exemple de Requête Analytique
-
+```sql
 -- Taux de victoire par classe de champion sur Summoners Rift le week-end
 SELECT 
     dc.champion_class,
@@ -112,6 +112,5 @@ JOIN dim_date dd ON fp.date_id = dd.date_id
 WHERE dm.map_name = 'Summoners Rift'
   AND dd.is_weekend = true
 GROUP BY dc.champion_class;
-
 
 # Atelier 3 - Visualisation
