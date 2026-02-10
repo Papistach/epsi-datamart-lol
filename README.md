@@ -45,14 +45,7 @@
 - `PLAYER` : Joueurs uniques
 - `CHAMPION` : Champions du jeu
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
-
-
-**Tables** :
 - **`raw_matches`** : Stockage JSON brut (étape ETL initiale)
-- **`match`** : Informations sur les parties (clé primaire `match_id`)
-- **`player`** : Joueurs uniques identifiés par `player_puuid`
-- **`champion`** : Dictionnaire des champions (id + nom)
-- **`participation`** : Table de faits liant matchs, joueurs, champions avec statistiques détaillées
 
 ---
 
