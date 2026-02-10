@@ -91,3 +91,7 @@ docker-compose up -d
 # 2. 02_transform.ipynb
 # 3. 03_analysis.ipynb
 # 4. 04_Player.ipynb
+
+## Résultats des chargements
+
+![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.png)
