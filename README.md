@@ -58,8 +58,11 @@
 ### Démarrage
 
 #### 1. Cloner le repo
+
+```bash
 git clone https://github.com/TON_USERNAME/epsi-datamart-lol.git
 cd epsi-datamart-lol
+```
 
 #### 2. Démarrer l'infrastructure
 ```bash
