@@ -78,9 +78,7 @@ Token : epsi2024
 ---
 # Atelier 2 - Modèle dimensionnel
 
-## 🌟 Atelier 2 - Modèle Dimensionnel
-
-### Schéma en Étoile
+## Schéma en Étoile
 ![Schema Etoile](diagrams/diagram.png)
 
 ### Tables Dimensionnelles
@@ -92,14 +90,14 @@ Token : epsi2024
 | `dim_map` | Dimension | Cartes de jeu (Summoners Rift, ARAM, etc.) |
 | `fact_performance` | Fait | Mesures : kills, deaths, assists, gold, KDA, win/loss |
 
-### Nouveaux Notebooks
+## Nouveaux Notebooks
 | Notebook | Description |
 |----------|-------------|
 | `05_dimensional_model.ipynb` | Création du schéma en étoile |
 | `06_etl_dimensions.ipynb` | Alimentation des dimensions et faits |
 | `07_analyse_dimensionnelle.ipynb` | Analyses complexes (ex: winrate par classe sur carte X le week-end) |
 
-### Exemple de Requête Analytique
+## Exemple de Requête Analytique
 ```sql
 -- Taux de victoire par classe de champion sur Summoners Rift le week-end
 SELECT 
