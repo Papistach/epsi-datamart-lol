@@ -1,9 +1,9 @@
 # 🎮 League of Legends - Analyse de Parties
 
 ## 👥 Équipe
-- Papis CISSOKO
-- Ovina SAINT-MARTIN
-- Ange Fleuryse MANANGANJI
+- Papis C
+- Ovina ST-M
+- Ange Fleuryse M
 
 ## 📊 Jeu de données
 **Source** : https://huggingface.co/datasets/AngryBacteria/league_of_legends/tree/main
@@ -29,9 +29,7 @@
 |-------|-------------|-------------|
 | **Extract/Load** | PostgreSQL 15 | Stockage données brutes JSON + modèle relationnel |
 | **Transform** | Jupyter Notebook (Python) | pandas, SQLAlchemy, ijson pour traitement 1.5GB |
-| **Visualisation** | Jupyter Notebook | matplotlib, seaborn pour analyses et graphiques |
-
-### Infrastructure
+| **Visualisation** | Jupyter Notebook | matplotlib, seaborn pour analyses et ### Infrastructure
 - **Docker Compose** : PostgreSQL + Jupyter Notebook
 - **Volume partagé** : Données et notebooks persistés
   
@@ -44,6 +42,11 @@
 - `PLAYER` : Joueurs uniques
 - `CHAMPION` : Champions du jeu
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
+
+
+## Résultats des changements de données
+
+![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.png)
 
 ## 🚀 Utilisation
 ```bash
@@ -91,7 +94,3 @@ docker-compose up -d
 # 2. 02_transform.ipynb
 # 3. 03_analysis.ipynb
 # 4. 04_Player.ipynb
-
-## Résultats des chargements
-
-![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.png)
