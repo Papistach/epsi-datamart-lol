@@ -37,6 +37,8 @@
   
 [ERD](diagrams/erd.png)
 
+
+
 **Tables** :
 - `MATCH` : Informations sur les parties
 - `PLAYER` : Joueurs uniques
