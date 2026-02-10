@@ -12,11 +12,15 @@
 - Informations de match (durée, mode, version)
 - Statistiques par joueur (kills, deaths, assists, gold)
 - Champions joués
+- Résultats des parties (victoire/défaite)
 
 **Caractéristiques** :
-- X matchs
-- Y joueurs uniques
-- Z champions
+- ~50,000+ matchs (fichier 1.5 GB)
+- 10 joueurs par match (500,000+ participations)
+- 160+ champions uniques
+- Format JSON original converti pour analyse
+
+**Note** : Les données originales sont au format JSON (API Riot Games). Conformément aux contraintes de l'atelier, un processus ELT (Extract-Load-Transform) est implémenté pour structurer les données en modèle relationnel.
 
 ## 🏗️ Architecture
 
