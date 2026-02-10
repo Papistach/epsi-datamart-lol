@@ -42,11 +42,7 @@
 - `PLAYER` : Joueurs uniques
 - `CHAMPION` : Champions du jeu
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
-
-
-## Résultats des changements de données
-
-![Distribution du nombre de parties par joueur](Distribution du nombre de parties par joueur.PNG)
+- 
 
 ## 🚀 Utilisation
 ```bash
