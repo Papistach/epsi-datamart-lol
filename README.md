@@ -99,7 +99,7 @@ Token : epsi2024
 | `07_analyse_dimensionnelle.ipynb` | Analyses complexes (ex: winrate par classe sur carte X le week-end) |
 
 ### Exemple de Requête Analytique
-```sql
+
 -- Taux de victoire par classe de champion sur Summoners Rift le week-end
 SELECT 
     dc.champion_class,
