@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: game_postgres
+    environment:
+      POSTGRES_DB: game_dw
+      POSTGRES_USER: game_user
+      POSTGRES_PASSWORD: game_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data:/data:ro  # Monte le dossier data en lecture seule
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U game_user -d game_dw"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  notebook:
+    image: jupyter/scipy-notebook:python-3.11
+    container_name: game_notebook
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=epsi2024
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan/work
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
