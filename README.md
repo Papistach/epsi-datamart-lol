@@ -80,7 +80,7 @@ Token : epsi2024
 ## 🌟 Atelier 2 - Modèle Dimensionnel
 
 ### Schéma en Étoile
-![Schema Etoile](diagrams/star_schema.png)
+![Schema Etoile](diagrams/mermaid-ai-diagram-2026-02-10-134341.png)
 
 ### Tables Dimensionnelles
 | Table | Type | Description |
