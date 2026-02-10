@@ -37,6 +37,8 @@
   
 Ici le [ERD](/erd.png)
 
+![ERD](erd.png)
+
 **Tables** :
 - `MATCH` : Informations sur les parties
 - `PLAYER` : Joueurs uniques
