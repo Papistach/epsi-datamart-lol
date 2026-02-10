@@ -45,7 +45,6 @@
 - `PLAYER` : Joueurs uniques
 - `CHAMPION` : Champions du jeu
 - `PARTICIPATION` : Lien entre matchs, joueurs et champions avec stats
-- **`raw_matches`** : Stockage JSON brut (étape ETL initiale)
 
 ---
 
