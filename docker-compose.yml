@@ -8,11 +8,11 @@ services:
       POSTGRES_DB: game_dw
       POSTGRES_USER: game_user
       POSTGRES_PASSWORD: game_password
+      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./data:/data:ro  # Monte le dossier data en lecture seule
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U game_user -d game_dw"]
       interval: 5s
@@ -28,10 +28,53 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - .:/home/jovyan/work
+      - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\notebooks:/home/jovyan/work/notebooks
+      - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\Data:/home/jovyan/work/data:ro
+      - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\sql:/home/jovyan/work/sql:ro
+      - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\diagrams:/home/jovyan/work/diagrams:ro
+      - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\requirements.txt:/home/jovyan/work/requirements.txt:ro
     depends_on:
       postgres:
         condition: service_healthy
+    command: >
+      bash -c "
+        pip install --no-cache-dir -r /home/jovyan/work/requirements.txt &&
+        start-notebook.sh --NotebookApp.token='epsi2024'
+      "
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: game_metabase
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=metabase
+      - MB_DB_PORT=5432
+      - MB_DB_USER=metabase
+      - MB_DB_PASS=metabase_password
+      - MB_DB_HOST=postgres_metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres_metabase
+
+  postgres_metabase:
+    image: postgres:15-alpine
+    container_name: metabase_db
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: metabase_password
+    volumes:
+      - metabase_data:/var/lib/postgresql/data
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: game_dozzle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "9999:8080"
 
 volumes:
   postgres_data:
+  metabase_data:
