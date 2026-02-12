@@ -54,6 +54,12 @@
 - Docker Desktop
 - Git
 - Fichier `match_v5.json` placé dans `data/raw/`
+- pandas>=2.0.0
+- sqlalchemy>=2.0.0
+- psycopg2-binary>=2.9.0
+- matplotlib>=3.5.0
+- seaborn>=0.12.0
+- ijson>=3.2.0
 
 ### Démarrage
 
