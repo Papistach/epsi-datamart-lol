@@ -229,8 +229,7 @@ Sélectionner la base "Game Data Warehouse"
 
 ### KPI 4: Win rate par champion
 
-    SELECT 
-        c.champion_name,
+    SELECT c.champion_name,
         COUNT(*) as total_games,
         ROUND(COUNT(CASE WHEN fp.win = true THEN 1 END) * 100.0 / COUNT(*), 2) as win_rate_pct
     FROM fact_performance fp
@@ -239,8 +238,7 @@ Sélectionner la base "Game Data Warehouse"
     ORDER BY win_rate_pct DESC;
 
 ### KPI 5 : KDA moyen par niveau de champion
-    SELECT 
-        champ_level,
+    SELECT champ_level,
         ROUND(AVG(kda_ratio), 2) as kda_moyen,
         ROUND(AVG(kills), 2) as kills_moyen,
         ROUND(AVG(deaths), 2) as deaths_moyen,
