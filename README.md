@@ -221,12 +221,14 @@ Sélectionner la base "Game Data Warehouse"
         ROUND(AVG(game_duration), 2) as duree_moyenne_secondes,
         ROUND(AVG(game_duration) / 60, 2) as duree_moyenne_minutes
     FROM fact_performance;
+![KPI 2](Images/KPI2.PNG)
 
 ### KPI 3: Nombre de joueurs actifs
 
     SELECT 
         COUNT(DISTINCT player_sk) as nb_joueurs_actifs
     FROM fact_performance;
+![KPI 3](Images/KPI3.PNG)
 
 ### KPI 4: Win rate par champion
 
@@ -237,6 +239,7 @@ Sélectionner la base "Game Data Warehouse"
     JOIN dim_champion c ON fp.champion_sk = c.champion_sk
     GROUP BY c.champion_name
     ORDER BY win_rate_pct DESC;
+![KPI 4](Images/KPI4.PNG)
 
 ### KPI 5 : KDA moyen par niveau de champion
     SELECT champ_level,
@@ -247,6 +250,7 @@ Sélectionner la base "Game Data Warehouse"
     FROM fact_performance
     GROUP BY champ_level
     ORDER BY champ_level;
+![KPI 5](Images/KPI5.PNG)
 
 ## Etape 3 :  Centralisation des logs
 
