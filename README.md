@@ -276,7 +276,7 @@ Log observé dans Dozzle :
     Is the server running on that host and accepting TCP/IP connections?
 
 ### Visualisation de l'erreur du Dozzle
-![Erreur sur dozzle](Images/err_dozzle)
+![Erreur sur dozzle](Images/err_dozzle.PNG)
 
 Résolution : Redémarrage du conteneur PostgreSQL
 
