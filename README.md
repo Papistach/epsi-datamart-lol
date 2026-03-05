@@ -127,51 +127,37 @@ GROUP BY dc.champion_class;
 ## Étape 1 : Intégration de Metabase
 ### 1.1 Modification du docker-compose.yml
 Ajoutez deux services qui sont metabase et dozzle au fichier docker-compose.yml existant :
-yaml
-
-version: '3.9'
-services: existants (postgres, jupyter) ...
-  
+ 
   ### METABASE 
-    image: metabase/metabase:latest
-    container_name: lol_metabase
-    environment:
-      MB_DB_TYPE: postgres
-      MB_DB_DBNAME: metabase
-      MB_DB_PORT: 5432
-      MB_DB_USER: metabase
-      MB_DB_PASS: metabase_secret
-      MB_DB_HOST: postgres
-      JAVA_OPTS: "-Xmx2g"
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
-    networks:
-      - lol_network
-    volumes:
-      - metabase_data:/metabase-data
+     metabase:
+       image: metabase/metabase:latest
+        container_name: game_metabase
+        environment:
+          - MB_DB_TYPE=postgres
+          - MB_DB_DBNAME=metabase
+          - MB_DB_PORT=5432
+          - MB_DB_USER=metabase
+          - MB_DB_PASS=metabase_password
+          - MB_DB_HOST=postgres_metabase
+        ports:
+          - "3000:3000"
+        depends_on:
+          postgres_metabase:
+            condition: service_healthy
+        networks:
+          - game_network
 
   ### DOZZLE (Logs)
     dozzle:
-    image: amir20/dozzle:latest
-    container_name: lol_dozzle
-    environment:
-      - DOZZLE_LEVEL=debug
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - "8080:8080"
-    networks:
-      - lol_network
-
-    networks:
-    lol_network:
-    driver: bridge
-    volumes:
-
-  # Volumes existants
-  ## metabase_data :
+      image: amir20/dozzle:latest
+      container_name: game_dozzle
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+      ports:
+        - "9999:8080"
+      networks:
+        - game_network
+  
 
 ### 1.2 Création de la base Metabase dans PostgreSQL
 Créez un script init-metabase.sql :
