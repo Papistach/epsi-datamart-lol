@@ -258,17 +258,25 @@ Sélectionner la base "Game Data Warehouse"
 - **URL** : http://localhost:9999
 - **Fonction** : Visualisation centralisée des logs de tous les conteneurs
 
+### Visualisations :
+![Visualisations](Images/visualisations_dozzle.PNG)
+
 ### Architecture
 Tous les conteneurs envoient automatiquement leurs logs stdout/stderr à Dozzle via le montage du Docker socket.
 
 ### Exemple d'erreur documentée
 **Scénario** : Arrêt du service PostgreSQL
+![Simulation d'erreur](Images/simul_erreur.PNG)
+
 **Impact** : Les services Metabase et Notebook perdent la connexion à la base de données
 
 Log observé dans Dozzle :
 
     ERROR: connection to server at "postgres", port 5432 failed: Connection refused
     Is the server running on that host and accepting TCP/IP connections?
+
+### Visualisation de l'erreur du Dozzle
+![Erreur sur dozzle](Images/err_dozzle)
 
 Résolution : Redémarrage du conteneur PostgreSQL
 
