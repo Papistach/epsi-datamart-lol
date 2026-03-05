@@ -8,11 +8,12 @@ services:
       POSTGRES_DB: game_dw
       POSTGRES_USER: game_user
       POSTGRES_PASSWORD: game_password
-      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - game_network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U game_user -d game_dw"]
       interval: 5s
@@ -33,14 +34,36 @@ services:
       - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\sql:/home/jovyan/work/sql:ro
       - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\diagrams:/home/jovyan/work/diagrams:ro
       - C:\Users\Papis\Documents\EPSI\MASTER 1\DataMart\requirements.txt:/home/jovyan/work/requirements.txt:ro
+      - "C:/Users/Administrateur/Desktop/DATAMART/epsi-datamart-lol/V2:/home/jovyan/work"
+      - "C:/Users/Administrateur/Desktop/DATAMART/epsi-datamart-lol/data:/home/jovyan/work/data:ro"
+      - "C:/Users/Administrateur/Desktop/DATAMART/epsi-datamart-lol/SQL:/home/jovyan/work/sql:ro"
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - game_network
     command: >
       bash -c "
-        pip install --no-cache-dir -r /home/jovyan/work/requirements.txt &&
+        pip install --no-cache-dir pandas sqlalchemy psycopg2-binary matplotlib seaborn ijson &&
         start-notebook.sh --NotebookApp.token='epsi2024'
       "
+
+  postgres_metabase:
+    image: postgres:15-alpine
+    container_name: metabase_db
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: metabase_password
+    volumes:
+      - metabase_data:/var/lib/postgresql/data
+    networks:
+      - game_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U metabase -d metabase"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   metabase:
     image: metabase/metabase:latest
@@ -55,17 +78,10 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres_metabase
-
-  postgres_metabase:
-    image: postgres:15-alpine
-    container_name: metabase_db
-    environment:
-      POSTGRES_DB: metabase
-      POSTGRES_USER: metabase
-      POSTGRES_PASSWORD: metabase_password
-    volumes:
-      - metabase_data:/var/lib/postgresql/data
+      postgres_metabase:
+        condition: service_healthy
+    networks:
+      - game_network
 
   dozzle:
     image: amir20/dozzle:latest
@@ -74,7 +90,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - "9999:8080"
+    networks:
+      - game_network
 
 volumes:
   postgres_data:
   metabase_data:
+
+networks:
+  game_network:
+    driver: bridge
