@@ -158,7 +158,8 @@ Ajoutez deux services qui sont metabase et dozzle au fichier docker-compose.yml 
       networks:
         - game_network
   
-
+ Le fichier YAML complet est disponible en pièce jointe dans le dépôt GitHub.
+ 
 ### 1.2 Création de la base Metabase dans PostgreSQL
 Créez un script init-metabase.sql :
 Se connecter à postgres en tant que superuser
