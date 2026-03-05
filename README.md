@@ -204,7 +204,7 @@ Accédez à Metabase : http://localhost:3000
     Username : game_user
     Password : game_password
 
-## Etape 2: Cration de 5indicateurs KPI
+## Etape 2: Création de 5indicateurs KPI
 Dans Metabase, clique sur "New" 
 Sélectionner la base "Game Data Warehouse"
 
