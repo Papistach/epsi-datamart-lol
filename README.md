@@ -213,6 +213,7 @@ Sélectionner la base "Game Data Warehouse"
     SELECT 
         ROUND(COUNT(CASE WHEN win = true THEN 1 END) * 100.0 / COUNT(*), 2) as taux_victoire_pct
     FROM fact_performance;
+![KPI 1](Images/KPI1.PNG)
 
 ### KPI 2: Durée moyenne des parties
 
