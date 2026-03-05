@@ -125,12 +125,11 @@ GROUP BY dc.champion_class;
 # Atelier 3 - Visualisation
 
 ## Étape 1 : Intégration de Metabase
-1.1 Modification du docker-compose.yml
+### 1.1 Modification du docker-compose.yml
 Ajoutez deux services qui sont metabase et dozzle au fichier docker-compose.yml existant :
 yaml
 
 version: '3.9'
-
 services: existants (postgres, jupyter) ...
   
   ### METABASE 
