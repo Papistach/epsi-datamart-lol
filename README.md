@@ -87,6 +87,9 @@ Token : epsi2024
 ---
 # Atelier 2 - Modèle dimensionnel
 
+**Le répertoire V2** : contient l’ensemble des sept fichiers Notebook au format .ipynb.
+**Le répertoire Chargement des données**: on retrouve les captures d’écran présentant les résultats obtenus lors de l’exécution des différents notebooks. 
+
 ## Schéma en Étoile
 ![Schema Etoile](diagrams/diagram.png)
 
