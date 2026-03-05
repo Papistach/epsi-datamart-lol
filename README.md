@@ -1,14 +1,14 @@
 # Atelier 1 - Statistiques de parties
 
-# 🎮 League of Legends - Analyse de Parties
+# League of Legends - Analyse de Parties
 
-## 👥 Équipe
+## Équipe
 - Papis C
 - Ovina ST-M
 - Ange Fleuryse M
 - Yohann L
 
-## 📊 Jeu de données
+## Jeu de données
 **Source** : https://huggingface.co/datasets/AngryBacteria/league_of_legends/tree/main
 
 **Description** : Dataset contenant les statistiques détaillées de matchs League of Legends incluant :
@@ -25,7 +25,7 @@
 
 **Note** : Les données originales sont au format JSON (API Riot Games). Conformément aux contraintes de l'atelier, un processus ELT (Extract-Load-Transform) est implémenté pour structurer les données en modèle relationnel.
 
-## 🏗️ Architecture
+## Architecture
 
 ### Stack technique
 | Étape | Technologie | Description |
@@ -124,18 +124,16 @@ GROUP BY dc.champion_class;
 ---
 # Atelier 3 - Visualisation
 
-Étape 1 : Intégration de Metabase
+## Étape 1 : Intégration de Metabase
 1.1 Modification du docker-compose.yml
 Ajoutez deux services qui sont metabase et dozzle au fichier docker-compose.yml existant :
 yaml
 
 version: '3.9'
 
-services:
-  # ...  services existants (postgres, jupyter) ...
+services: existants (postgres, jupyter) ...
   
-  # ==================== METABASE ====================
-  metabase:
+  ### METABASE 
     image: metabase/metabase:latest
     container_name: lol_metabase
     environment:
@@ -155,8 +153,8 @@ services:
     volumes:
       - metabase_data:/metabase-data
 
-  # ==================== DOZZLE (Logs) ====================
-  dozzle:
+  ### DOZZLE (Logs)
+    dozzle:
     image: amir20/dozzle:latest
     container_name: lol_dozzle
     environment:
@@ -168,93 +166,96 @@ services:
     networks:
       - lol_network
 
-networks:
-  lol_network:
+    networks:
+    lol_network:
     driver: bridge
+    volumes:
 
-volumes:
-  # ... vos volumes existants ...
-  metabase_data:
-1.2 Création de la base Metabase dans PostgreSQL
-Créez un script init-metabase.sql:
-sql
--- Se connecter à postgres en tant que superuser
-CREATE DATABASE metabase;
-CREATE USER metabase_user WITH ENCRYPTED PASSWORD 'metabase_pw';
-GRANT ALL PRIVILEGES ON DATABASE metabase TO metabase-_user;
-1.3 Premier démarrage
+  # Volumes existants
+  ## metabase_data :
 
-# Démarrer la stack complète
-docker-compose down  # si déjà en cours
-docker-compose up -d
+### 1.2 Création de la base Metabase dans PostgreSQL
+Créez un script init-metabase.sql :
+Se connecter à postgres en tant que superuser
 
-# Vérifier que Metabase est prêt 
+    CREATE DATABASE metabase;
+    CREATE USER metabase_user WITH ENCRYPTED PASSWORD 'metabase_pw';
+    GRANT ALL PRIVILEGES ON DATABASE metabase TO metabase-_user;
+
+### 1.3 Premier démarrage
+
+#### Démarrer la stack complète
+
+    docker-compose down  # si déjà en cours
+    docker-compose up -d
+
+#### Vérifier que Metabase est prêt 
 docker logs -f metabase
 Accédez à Metabase : http://localhost:3000
-Configuration initiale :
-Language : Français 
-Email : epsi@local.fr
-Mot de passe : espsi2025
-Database connection : Game DataWarehouse
-Type : PostgreSQL
-Host : postgres 
-Port : 5432
-Database : game_dw 
-Username : game_user
-Password : game_password
+##### Configuration initiale :
+    Language : Français 
+    Email : epsi@local.fr
+    Mot de passe : espsi2025
+    Database connection : Game DataWarehouse
+    Type : PostgreSQL
+    Host : postgres 
+    Port : 5432
+    Database : game_dw 
+    Username : game_user
+    Password : game_password
 
-Etape 2: Cration de 5indicateurs KPI
+## Etape 2: Cration de 5indicateurs KPI
 Dans Metabase, clique sur "New" 
-on sélectionne la base "Game Data Warehouse"
+Sélectionner la base "Game Data Warehouse"
 
-KPI 1:Taux de victoire global 
+### KPI 1: Taux de victoire global 
 
-SELECT 
-    ROUND(COUNT(CASE WHEN win = true THEN 1 END) * 100.0 / COUNT(*), 2) as taux_victoire_pct
-FROM fact_performance;
+    SELECT 
+        ROUND(COUNT(CASE WHEN win = true THEN 1 END) * 100.0 / COUNT(*), 2) as taux_victoire_pct
+    FROM fact_performance;
 
-KPI 2: Durée moyenne des parties
+### KPI 2: Durée moyenne des parties
 
-SELECT 
-    ROUND(AVG(game_duration), 2) as duree_moyenne_secondes,
-    ROUND(AVG(game_duration) / 60, 2) as duree_moyenne_minutes
-FROM fact_performance;
+    SELECT 
+        ROUND(AVG(game_duration), 2) as duree_moyenne_secondes,
+        ROUND(AVG(game_duration) / 60, 2) as duree_moyenne_minutes
+    FROM fact_performance;
 
-KPI 3: Nombre de joueurs actifs
+### KPI 3: Nombre de joueurs actifs
 
-SELECT 
-    COUNT(DISTINCT player_sk) as nb_joueurs_actifs
-FROM fact_performance;
+    SELECT 
+        COUNT(DISTINCT player_sk) as nb_joueurs_actifs
+    FROM fact_performance;
 
-KPI 4: Win rate par champion
+### KPI 4: Win rate par champion
 
-SELECT 
-    c.champion_name,
-    COUNT(*) as total_games,
-    ROUND(COUNT(CASE WHEN fp.win = true THEN 1 END) * 100.0 / COUNT(*), 2) as win_rate_pct
-FROM fact_performance fp
-JOIN dim_champion c ON fp.champion_sk = c.champion_sk
-GROUP BY c.champion_name
-ORDER BY win_rate_pct DESC;
+    SELECT 
+        c.champion_name,
+        COUNT(*) as total_games,
+        ROUND(COUNT(CASE WHEN fp.win = true THEN 1 END) * 100.0 / COUNT(*), 2) as win_rate_pct
+    FROM fact_performance fp
+    JOIN dim_champion c ON fp.champion_sk = c.champion_sk
+    GROUP BY c.champion_name
+    ORDER BY win_rate_pct DESC;
 
-KPI 5 : KDA moyen par niveau de champion
-SELECT 
-    champ_level,
-    ROUND(AVG(kda_ratio), 2) as kda_moyen,
-    ROUND(AVG(kills), 2) as kills_moyen,
-    ROUND(AVG(deaths), 2) as deaths_moyen,
-    ROUND(AVG(assists), 2) as assists_moyen
-FROM fact_performance
-GROUP BY champ_level
-ORDER BY champ_level;
+### KPI 5 : KDA moyen par niveau de champion
+    SELECT 
+        champ_level,
+        ROUND(AVG(kda_ratio), 2) as kda_moyen,
+        ROUND(AVG(kills), 2) as kills_moyen,
+        ROUND(AVG(deaths), 2) as deaths_moyen,
+        ROUND(AVG(assists), 2) as assists_moyen
+    FROM fact_performance
+    GROUP BY champ_level
+    ORDER BY champ_level;
 
-Etape 3 :  Centralisation des logs
+## Etape 3 :  Centralisation des logs
 
- Service Dozzle
+###  Service Dozzle
 - **URL** : http://localhost:9999
 - **Fonction** : Visualisation centralisée des logs de tous les conteneurs
 
-# Architecture
+### Architecture
 Tous les conteneurs envoient automatiquement leurs logs stdout/stderr à Dozzle via le montage du Docker socket.
 
 ### Exemple d'erreur documentée
@@ -262,10 +263,10 @@ Tous les conteneurs envoient automatiquement leurs logs stdout/stderr à Dozzle 
 **Impact** : Les services Metabase et Notebook perdent la connexion à la base de données
 
 Log observé dans Dozzle :
-ERROR: connection to server at "postgres", port 5432 failed: Connection refused
-Is the server running on that host and accepting TCP/IP connections?
+
+    ERROR: connection to server at "postgres", port 5432 failed: Connection refused
+    Is the server running on that host and accepting TCP/IP connections?
 
 Résolution : Redémarrage du conteneur PostgreSQL
-docker start game_postgres
 
-
+    docker start game_postgres
